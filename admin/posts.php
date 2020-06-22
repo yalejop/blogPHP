@@ -1,6 +1,6 @@
 <?php 
 
-include_once 'config.php';
+include_once '../config.php';
 $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
 $query->execute();
 
@@ -28,21 +28,28 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
         </div>    
     </div>
     <div class="row">
-        <div class="col-md-8">
+    
+    <div class="col-md-8">
+        <h2>Posts</h2>
+        <a class="btn btn-primary" href="insert-post.php">New Post</a>
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        
             <?php 
-            foreach ($blogPosts as $blogpost) {
-                echo '<div class="blog-post">';
-                echo '<h2>' .  $blogpost['title'] . '</h2>';
-                echo '<p>Jan 1, 2020 by <a href="">Alex</a></p>';
-                echo '<div class="blog-post-image">';
-                echo '<img src="images/keyboard.jpg" alt="imagen avatar">';
-                echo '</div>';
-                echo '<div class="blog-post-content">';
-                echo $blogpost['content'];
-                echo '</div>';
-                echo '</div>';
+            foreach ($blogPosts as $blogPost) {
+                echo '<tr>';
+                echo '<td>' . $blogPost['title'] . '</td>';
+                echo '<td>Edit</td>';
+                echo '<td>Delete</td>';
+                echo '</tr>';
             }
+            
             ?>
+        </table>
         </div>
         <div class="col-md-4">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, accusamus labore sunt culpa ea sequi doloremque optio necessitatibus sint placeat impedit, nemo natus consectetur quas error quia, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, accusamus labore sunt culpa ea sequi doloremque optio necessitatibus sint placeat impedit, nemo natus consectetur quas error quia
@@ -51,7 +58,7 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
     <div class="row">
     <div class="col-md-12">
         <footer>
-            this is a footer<br>
+            This is a footer<br>
             <a href="admin/index.php">Admin Panel</a>
         </footer>
     </div>

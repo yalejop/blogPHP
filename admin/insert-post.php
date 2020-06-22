@@ -1,11 +1,5 @@
 <?php 
-
-include_once 'config.php';
-$query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-$query->execute();
-
-$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
-
+include_once '../config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,20 +23,18 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <div class="row">
         <div class="col-md-8">
-            <?php 
-            foreach ($blogPosts as $blogpost) {
-                echo '<div class="blog-post">';
-                echo '<h2>' .  $blogpost['title'] . '</h2>';
-                echo '<p>Jan 1, 2020 by <a href="">Alex</a></p>';
-                echo '<div class="blog-post-image">';
-                echo '<img src="images/keyboard.jpg" alt="imagen avatar">';
-                echo '</div>';
-                echo '<div class="blog-post-content">';
-                echo $blogpost['content'];
-                echo '</div>';
-                echo '</div>';
-            }
-            ?>
+            <h2>New Post</h2>
+            <a class="btn btn-default" href="posts.php">Back</a>
+
+            <form action="insert-post.php" method="post">
+            <div class="form-group">
+                <label for="inputTitle">Title</label>
+                <input class="form-control" type="text" name="title" id="title">
+            </div>
+            <textarea class="form-control" name="content" id="inputContent"  rows="5"></textarea>
+            <br>
+            <input class="btn btn-primary"  type="submit" value="Save">
+            </form>
         </div>
         <div class="col-md-4">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, accusamus labore sunt culpa ea sequi doloremque optio necessitatibus sint placeat impedit, nemo natus consectetur quas error quia, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, accusamus labore sunt culpa ea sequi doloremque optio necessitatibus sint placeat impedit, nemo natus consectetur quas error quia
@@ -51,7 +43,7 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
     <div class="row">
     <div class="col-md-12">
         <footer>
-            this is a footer<br>
+            This is a footer<br>
             <a href="admin/index.php">Admin Panel</a>
         </footer>
     </div>
