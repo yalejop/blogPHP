@@ -1,11 +1,3 @@
-<?php 
-
-$query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-$query->execute();
-
-$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,28 +19,25 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
         </div>    
     </div>
     <div class="row">
-    
-    <div class="col-md-8">
-        <h2>Posts</h2>
-        <a class="btn btn-primary" href="insert-post.php">New Post</a>
-        <table class="table">
-            <tr>
-                <th>Title</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        
-            <?php 
-            foreach ($blogPosts as $blogPost) {
-                echo '<tr>';
-                echo '<td>' . $blogPost['title'] . '</td>';
-                echo '<td>Edit</td>';
-                echo '<td>Delete</td>';
-                echo '</tr>';
-            }
-            
+        <div class="col-md-8">
+            <h2>New Post</h2>
+            <p>
+                <a class="btn btn-default" href="<?php echo BASE_URL; ?>admin/posts">Back</a>
+            </p>
+            <?php
+                if(isset($result) && $result) {
+                    echo '<div class="alert alert-success"> Post Saved Successful!!</div>';
+                }
             ?>
-        </table>
+            <form method="post">
+            <div class="form-group">
+                <label for="inputTitle">Title</label>
+                <input class="form-control" type="text" name="title" id="title">
+            </div>
+            <textarea class="form-control" name="content" id="inputContent"  rows="5"></textarea>
+            <br>
+            <input class="btn btn-primary"  type="submit" value="Save">
+            </form>
         </div>
         <div class="col-md-4">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, accusamus labore sunt culpa ea sequi doloremque optio necessitatibus sint placeat impedit, nemo natus consectetur quas error quia, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, accusamus labore sunt culpa ea sequi doloremque optio necessitatibus sint placeat impedit, nemo natus consectetur quas error quia
